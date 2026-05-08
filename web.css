@@ -1,0 +1,87 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #ffffff; /* Ek halka background taaki navbar highlight ho */
+}
+
+/* Main Navigation Bar Container */
+.bar {
+  display: flex;
+  justify-content: space-between; /* Title aur links ko left-right align karne ke liye */
+  align-items: center;
+  background-color: #272757; /* Clean white color */
+  padding: 15px 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Professional look ke liye subtle shadow */
+}
+
+/* Header / Title Styling */
+#head h1 {
+  
+  letter-spacing: 1px;
+  font-family: 'Dancing Script', cursive; /* Professional cursive look */
+  font-size: 32px;
+  color: #ffffff;
+}
+
+/* Navigation Container */
+#nav {
+  display: flex;
+  gap: 20px; /* Links ke beech ka space */
+  align-items: center;
+}
+
+/* Links Styling */
+#nav a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-transform: capitalize; /* Ye 'blog', 'login' jaise chhote words ko apne aap capital kar dega (jaise 'Blog', 'Login') */
+}
+
+/* Hover Effect */
+#nav a:hover {
+  color: #0056b3; /* Clean blue text */
+  background-color: #f0f4f8; /* Hover karne par halka sa background color */
+}
+.slider {
+    width: 100%;
+    max-width: 1000px; /* Aap apni zarurat ke hisab se change karein */
+    margin: auto;
+    overflow: hidden; /* Bahar wali images ko chhupane ke liye */
+    border-radius: 10px;
+}
+
+.slides {
+    display: flex;
+    width: 400%; /* Agar 4 images hain toh 400% */
+    animation: slide-animation 12s infinite; /* 12 seconds ka total loop */
+}
+
+.slides img {
+    width: 25%; /* Har image slider ka 1/4 hissa legi */
+    height: auto;
+}
+
+/* Sliding Animation */
+@keyframes slide-animation {
+    0% { transform: translateX(0%); }
+    20% { transform: translateX(0%); }    /* Pehli photo ruke */
+    25% { transform: translateX(-25%); }  /* Slide start */
+    45% { transform: translateX(-25%); }  /* Dusri photo ruke */
+    50% { transform: translateX(-50%); }  /* Slide start */
+    70% { transform: translateX(-50%); }  /* Teesri photo ruke */
+    75% { transform: translateX(-75%); }  /* Slide start */
+    95% { transform: translateX(-75%); }  /* Last photo ruke */
+    100% { transform: translateX(0%); }   /* Wapas pehli par */
+}
+
