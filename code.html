@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  padding: 40px 10px;
+}
+
+/* Container matching .form-container */
+.form-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 450px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Sections matching .form-section */
+.form-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.form-section h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+}
+
+/* Inputs matching .form-input */
+.form-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Photo Preview matching #image-preview */
+#image-preview {
+  display: block;
+  margin: 10px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.center { text-align: center; }
+
+/* Button matching .main-button */
+.main-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.main-button:hover {
+  background-color: #218838;
+}
+
+.submit-section {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+</style>
+</head>
+<body>
+
+  <div class="form-container">
+    <header>
+      <h1>Registration Form</h1>
+    </header>
+
+    <form id="registration-form">
+      
+      <div class="input-group center">
+        <input type="file" accept="image/*" onchange="loadFile(event)" id="file-input">
+        <img id="image-preview" src="https://via.placeholder.com/120" />
+      </div>
+
+      <div class="form-section">
+        <h3>Personal Details</h3>
+        <input type="text" id="user-name" class="form-input" placeholder="Your Full Name" required>
+        <input type="text" id="father-name" class="form-input" placeholder="Father's Name">
+        <input type="text" id="mother-name" class="form-input" placeholder="Mother's Name">
+        <input type="tel" id="mobile" class="form-input" maxlength="10" placeholder="Mobile Number">
+      </div>
+
+      <div class="form-section">
+        <h3>Documents</h3>
+        <div class="row">
+          <input type="tel" id="aadhar-no" class="form-input" maxlength="12" placeholder="Aadhar Number">
+        </div>
+        <input type="tel" id="jan-aadhar" class="form-input" maxlength="10" placeholder="Jan Aadhar Number">
+      </div>
+
+      <div class="submit-section">
+        <label>
+          <input type="checkbox" required> All info is correct
+        </label>
+        <button type="submit" id="submit-btn" class="main-button">Final Submit</button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    // 1. Image Preview Function
+    var loadFile = function(event) {
+      var output = document.getElementById('image-preview');
+      output.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+    // 2. FETCH CODE
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyOmTIYhC-FzSRVWmn0VVSvMSTKuQ7t9JEcYXiVl6iQy5vovBwzdA2w7Lcr-wQtW-_aEg/exec';
+    const form = document.getElementById('registration-form');
+    const btn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault(); 
+      
+      btn.disabled = true;
+      btn.innerText = "Sending Data...";
+
+      const formData = {
+        name: document.getElementById('user-name').value,
+        fatherName: document.getElementById('father-name').value,
+        motherName: document.getElementById('mother-name').value,
+        mobile: document.getElementById('mobile').value,
+        aadhar: document.getElementById('aadhar-no').value,
+        janAadhar: document.getElementById('jan-aadhar').value
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', 
+        cache: 'no-cache',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("Badhai ho! Data Google Sheet mein save ho gaya.");
+        form.reset(); 
+        document.getElementById('image-preview').src = "https://via.placeholder.com/120";
+      })
+      .catch(error => {
+        alert("Error! Data nahi gaya: " + error.message);
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerText = "Final Submit";
+      });
+    });
+  </script>
+</body>
+</html>
