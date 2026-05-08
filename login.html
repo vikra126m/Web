@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login & Sign Up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        h2 { margin-bottom: 25px; color: #333; font-weight: 600; }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.2);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover { text-decoration: underline; }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover { background-color: #0056b3; }
+
+        /* Sign Up Section Styling */
+        .signup-text {
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .signup-text a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        
+        <form action="#">
+            <div class="input-group">
+                <label for="id-type">Login with</label>
+                <select id="id-type" onchange="updatePlaceholder()" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="username">Username</option>
+                    <option value="mobile">Mobile Number</option>
+                    <option value="email">Email Address</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="identifier">Details</label>
+                <input type="text" id="identifier" placeholder="Please select login type" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+
+            <a href="#" class="forgot-password">Forgot password?</a>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="signup-text">
+            Naya account banana chahte hain? <a href="code.html">Sign Up</a>
+        </div>
+    </div>
+
+    <script>
+        function updatePlaceholder() {
+            const selectBox = document.getElementById('id-type');
+            const inputField = document.getElementById('identifier');
+            const val = selectBox.value;
+
+            if (val === 'username') {
+                inputField.placeholder = "Username enter karein";
+                inputField.type = "text";
+            } else if (val === 'mobile') {
+                inputField.placeholder = "Mobile Number enter karein";
+                inputField.type = "tel";
+            } else if (val === 'email') {
+                inputField.placeholder = "Email Address enter karein";
+                inputField.type = "email";
+            }
+        }
+    </script>
+
+</body>
+</html>
